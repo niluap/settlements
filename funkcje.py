@@ -1,18 +1,18 @@
 import math
-import database
+import bisect
+import copy
 
 
-def my_range(start, end, step):
-    while start <= end:
-        yield start
-        start += step
-
-
-def division_into_layers(excavation_depth, z, depth_step):
+def division_into_layers(soil_layers_database, depth_step, excavation_depth):
+    layers_depth = copy.copy(soil_layers_database[0])
+    layers_depth.insert(0, excavation_depth)
+    #print(layers_depth)
+    layer_range = int(float(layers_depth[-1])/float(depth_step) + 1.0)
     steps = []
-    for j in my_range(excavation_depth, z, depth_step):
-        steps.append(j)
-    steps.append(z)
+    for j in range(len(layers_depth)-1):
+        for i in range(layer_range):
+            if float(layers_depth[j]) <= float(depth_step*i) <= float(layers_depth[j+1]):
+                steps.append(round(depth_step*i, 2))
     return steps
 
 
@@ -20,7 +20,7 @@ def ground_levelling(excavation_depth, layers_after_leveling):
     layers_for_center_and_point_method = []
     for i in layers_after_leveling:
         levelling = float(i) - float(excavation_depth)
-        layers_for_center_and_point_method.append(levelling)
+        layers_for_center_and_point_method.append(round(levelling, 2))
     return layers_for_center_and_point_method
 
 
@@ -61,16 +61,26 @@ def corner_point_method(L, B, layers_after_leveling):
     return etta_corner_point
 
 
-def primary_stresses(layers):
-    stresses_11 = []
-    for i in layers:
-        stresses_1 = float(i*database.first_layer['unit weight'])
-        #print("for {0} m depth, primary stresses are equal to: {1} kPa".format(i, stresses_1))
-        stresses_11.append(stresses_1)
-    #print(stresses_11)
+def get_weight_at_depth(soil_base, depth):
+    weight_index = bisect.bisect_left(soil_base[0], depth)
+    return soil_base[1][weight_index]
+
+
+def weight_of_layers(layers_ps, weights_ps):
+    one_layer_weight = []
+    for i in range(len(layers_ps)-1):
+        stresses_1 = (layers_ps[i + 1] - layers_ps[i]) * weights_ps[i+1]
+        one_layer_weight.append(round(stresses_1, 2))
+    return one_layer_weight
+
+
+def primary_stresses(layers_ps, one_layer_weight):
+    stresses_11 = [0]
+    for idx in range(1, len(layers_ps)):
+        stresses_11.append(stresses_11[idx -1] + one_layer_weight[idx-1])
     return stresses_11
 
-
+'''
 def relief_stresses(excavation_depth, wspolczynnik_o):
     stresses_22 = []
     for k in range(len(wspolczynnik_o)):
@@ -110,6 +120,7 @@ def zadditional_stresses(evenly_distributed_load, excavation_depth, load_stresse
             additional_stress = i*0
         additional_stresses.append(additional_stress)
     return additional_stresses
+'''
 
 
 

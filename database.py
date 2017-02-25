@@ -1,10 +1,10 @@
 '''tamplate:
-1 - soil layer height
+1 - soil layer depth
 2 - soil unit weight
 3 - primary modulus of compressibility
 4 - secondary modulus of compressibility'''
 
-soil_layers_database = [[3.5, 2.7, 4, 2], [20, 18, 19.5, 17], [36, 46, 42, 22], [40, 58, 80, 37]]
+soil_layers_data = [[3, 5, 9, 11], [25, 10, 15, 40], [36, 46, 42, 22], [40, 58, 80, 37]]
 
 
 
