@@ -77,50 +77,73 @@ def weight_of_layers(layers_ps, weights_ps):
 def primary_stresses(layers_ps, one_layer_weight):
     stresses_11 = [0]
     for idx in range(1, len(layers_ps)):
-        stresses_11.append(stresses_11[idx -1] + one_layer_weight[idx-1])
+        stresses_11.append(round(stresses_11[idx -1],2) + round(one_layer_weight[idx-1],2))
     return stresses_11
 
-'''
-def relief_stresses(excavation_depth, wspolczynnik_o):
+
+def relief_stresses(excavation_depth, wspolczynnik_o, list_of_weights, layers_with_0):
     stresses_22 = []
+    idx_rs = layers_with_0.index(excavation_depth)
     for k in range(len(wspolczynnik_o)):
-        stresses_2 = float(wspolczynnik_o[k]) * float(excavation_depth) * float(database.first_layer['unit weight'])
-        stresses_22.append(stresses_2)
-    #print(stresses_22)
+        stresses_2 = float(wspolczynnik_o[k]) * excavation_depth * float(list_of_weights[idx_rs])
+        stresses_22.append(round(stresses_2,2))
     return stresses_22
 
 
 def q_stresses(evenly_distributed_load, wspolczynnik_o):
     stresses_33 = []
     for k in range(len(wspolczynnik_o)):
-        stresses_3 = float(wspolczynnik_o[k]) * float(evenly_distributed_load)
-        stresses_33.append(stresses_3)
-    #print(stresses_33)
+        stresses_3 = float(wspolczynnik_o[k]) * evenly_distributed_load
+        stresses_33.append(round(stresses_3, 2))
     return stresses_33
 
 
-def zsecondary_stresses(evenly_distributed_load, excavation_depth, excavation_stresses, load_stresses):
+def zsecondary_stresses(evenly_distributed_load, excavation_stresses, load_stresses):
     secondary_stresses = []
     for i in range(len(excavation_stresses)):
-        if float(evenly_distributed_load) > float(excavation_depth) * float(database.first_layer['unit weight']):
+        if evenly_distributed_load > excavation_stresses[0]:
             secondary_stress = float(excavation_stresses[i])
         else:
             secondary_stress = float(load_stresses[i])
         secondary_stresses.append(secondary_stress)
-    #print(secondary_stresses)
     return secondary_stresses
 
 
-def zadditional_stresses(evenly_distributed_load, excavation_depth, load_stresses, zs_stresses):
+def zadditional_stresses(evenly_distributed_load, load_stresses, zs_stresses, excavation_stresses):
     additional_stresses = []
     for i in range(len(zs_stresses)):
-        if float(evenly_distributed_load) > float(excavation_depth) * float(database.first_layer['unit weight']):
+        if evenly_distributed_load > excavation_stresses[0]:
             additional_stress = float(load_stresses[i]) - float(zs_stresses[i])
         else:
             additional_stress = i*0
         additional_stresses.append(additional_stress)
     return additional_stresses
-'''
+
+
+#FINDING z_max
+def settlement_scope(z_stresses, zd_stresses, layers):
+    #z_stresses.remove(0)
+    for i in range(len(layers)):
+        if 0.3*float(z_stresses[i]) >= float(zd_stresses[i]):
+            break
+    return i
+
+
+#CALCULATING SETTELMENTS
+def get_secondary_modulus_at_depth(soil_base, depth):
+    secondary_modulus_index = bisect.bisect_left(soil_base[0], depth)
+    return soil_base[2][secondary_modulus_index]
+
+
+def get_primary_modulus_at_depth(soil_base, depth):
+    primary_modulus_index = bisect.bisect_left(soil_base[0], depth)
+    return soil_base[3][primary_modulus_index]
+
+
+
+
+
+
 
 
 
