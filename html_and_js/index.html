@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Stresses in subsoil</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/my-styles.css" rel="stylesheet">
+    <link href="css/hover.css" rel="stylesheet" media="all">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="intro">
+
+                <h1 class="intro--teaser">Hello, I'm a Web Developer!</h1><br/>
+                <h2 class="intro--description">My name is Paulina and this is my first attempt at creating my own website.
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row skill-cards-row">
+                    <div class="col-md-4">
+                        <div class="white-card hvr-underline-reveal">
+                            <span class="white-card--title">Input data</span>
+                            <p class="white-card--description">
+                                I am very experienced Python developer.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="white-card hvr-underline-reveal">
+                            <span class="white-card--title">Stresses</span>
+                            <p class="white-card--description">
+                                I can test software using different libraries and frameworks.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="white-card hvr-underline-reveal">
+                            <span class="white-card--title">Results</span>
+                            <p class="white-card--description">
+                                I understand how websites should be built and I am a specialist in user experience area.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row skill-cards-row">
+                    <div class="col-md-8">
+
+                        <form class="form_main" id="input-data-form">
+                            <div class="form-single-input">
+                                <label class="title col-sm-5">Foundation width [B]:</label>
+                                <input type="text" id="width" placeholder="Enter data" />
+                            </div>
+                            <div class="form-single-input">
+                                <label class="title col-sm-5">Foundation length [L]:</label>
+                                <input type="text" id="length" placeholder="Enter data" />
+                            </div>
+                            <div class="form-single-input">
+                                <label class="title col-sm-5">Excavation depth [h]:</label>
+                                <input type="text" id="excavation_depth" placeholder="Enter data" />
+                            </div>
+                            <div class="form-single-input">
+                                <label class="title col-sm-5">Evenly distributed load [q]:</label>
+                                <input type="text" id="evenly_distributed_load" placeholder="Enter data" />
+                            </div>
+                            <div class="col-sm-5" id="submit">
+                                <button type="button" class="btn btn-default">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div div class="col-md-4">
+                        <h1>TUTAJ BĘDZIE OBRAZEK</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row skill-cards-row">
+                    <div class="col-md-8">
+                        <table id="myTable">
+                            <thead>
+                                <tr>
+                                    <td>Layer</td>
+                                    <td>Layer depth</td>
+                                    <td>Unit weight</td>
+                                    <td>Primary modulus</td>
+                                    <td>Secondary modulus</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="rows0">
+                                    <td>1</td>
+                                    <td><input name="Layer depth" type='text' placeholder='Layer depth' /> </td>
+                                    <td><input name='Unit weight' type='text' placeholder='Unit weight' /></td>
+                                    <td><input name='Primary depth' type='text' placeholder='Primary depth' /></td>
+                                    <td><input name='Secondary depth' type='text' placeholder='Secondary depth' /></td>
+                                </tr>
+                                <tr id="rows1"></tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <button type="button" class="btn btn-default" value="Insert row" id="insert_row">Insert row</button>
+                        </p>
+                        </br>
+                        <p>
+                            <button type="button" class="btn btn-default" value="Delete" id="delete_row">Delete row</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // click on button submit
+            $("#submit").on('click', function() {
+                // send ajax
+                $.ajax({
+                    url: 'http://127.0.0.1:8080/tasks',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        width: Number.parseFloat($('#width').val()),
+                        length: Number.parseFloat($('#length').val()),
+                        excavation_depth: Number.parseFloat($('#excavation_depth').val()),
+                        evenly_distributed_load: Number.parseFloat($('#evenly_distributed_load').val()),
+                    }),
+                    success: function(result) {
+                        console.log(result);
+                    },
+                    error: function(xhr, resp, text) {
+                        console.log(xhr, resp, text);
+                    }
+                })
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            var rows_count = 1;
+
+            $("#insert_row").click(function() {
+
+                $('#rows' + rows_count).html("<td>" + (rows_count + 1) + "</td>" +
+                    "<td><input name='Layer depth" + rows_count + "' type='text' placeholder='Layer depth'/> </td>" +
+                    "<td><input  name='Unit weigh" + rows_count + "' type='text' placeholder='Unit weight' ></td>" +
+                    "<td><input  name='Primary modulus" + rows_count + "' type='text' placeholder='Primary modulu' ></td>" +
+                    "<td><input  name='Secondary modulus" + rows_count + "' type='text' placeholder='Secondary modulu' ></td>");
+
+                $('#myTable').append('<tr id="rows' + (rows_count + 1) + '"></tr>');
+                rows_count++;
+            });
+
+            $("#delete_row").click(function() {
+                if (rows_count > 1) {
+                    $("#rows" + (rows_count - 1)).html('');
+                    rows_count--;
+                }
+            });
+
+
+
+        });
+    </script>
+</body>
+
+</html>
