@@ -42,28 +42,17 @@ def add_task():
     L = request.json['length']
     excavation_depth = request.json['excavation_depth']
     evenly_distributed_load = request.json['evenly_distributed_load']
+    soil_layers_data = request.json['soil_layers_data']
 
     if not isValidFormData(B, L, excavation_depth, evenly_distributed_load):
         return jsonify({'error': True})
     else:
-        get_results = compute_settlements(L, B, excavation_depth, evenly_distributed_load)
+        get_results = compute_settlements(L, B, excavation_depth, evenly_distributed_load,soil_layers_data)
         total_settlement = get_results[1] + get_results[2]
         return jsonify({'error': False,\
                     'Maximum depth at which loads affect settlements [m]': get_results[0],\
                         'Total settlements [mm]': total_settlement})
-'''
-    {
-        "error": False,
-        "timestamp": 12341243,
-        "data": {
-            "maxDepth": {
-                value: 10,
-                unit: 'm',
-                info: 'max depth at which loads affect settlements'
-            }
-        }
-    }
-'''
+
 if __name__ == '__main__':
     # handler.setLevel(logging.INFO)
     app.run(debug=True, port=8080)
