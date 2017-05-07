@@ -50,8 +50,8 @@ def add_task():
         get_results = compute_settlements(L, B, excavation_depth, evenly_distributed_load,soil_layers_data)
         total_settlement = get_results[1] + get_results[2]
         return jsonify({'error': False,\
-                    'Maximum depth at which loads affect settlements [m]': get_results[0],\
-                        'Total settlements [mm]': total_settlement})
+                    'depth_affect_settlements': get_results[0],\
+                        'total_settlements': total_settlement})
 
 if __name__ == '__main__':
     # handler.setLevel(logging.INFO)
