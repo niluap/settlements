@@ -1,16 +1,13 @@
 import funkcje
 import plotly.plotly as py
-import plotly.graph_objs as go
+#import plotly.graph_objs as go
 import copy
 
 
 '''
-USER INPUT DATA:
-L - FOUNDATION LENGTH
-B - FOUNDATION WIDTH
-excavation_depth 
-evenly_distributed_load 
-soil_layers_data'''
+soil_layers_data - layout:
+[[soil layer depth], [soil unit weight], [primary modulus of compressibility], [secondary modulus of compressibility]]
+'''
 
 
 def compute_settlements(L, B, excavation_depth, evenly_distributed_load, soil_layers_data):
@@ -53,7 +50,7 @@ def compute_settlements(L, B, excavation_depth, evenly_distributed_load, soil_la
         S_secondary = zs_stresses[i]*depth_step/secondary_modules[i]
         secondary_settlements += S_secondary
 
-    #sETTLEMENTS CAUSED BY PRIMARY STRESSES
+    #SETTLEMENTS CAUSED BY PRIMARY STRESSES
     primary_modules = list(map(lambda x: funkcje.get_primary_modulus_at_depth(soil_layers_database, x),
                                layers_for_settelments))
     primary_settlements = 0
@@ -61,4 +58,11 @@ def compute_settlements(L, B, excavation_depth, evenly_distributed_load, soil_la
         S_primary = zd_stresses[i]*0.01/primary_modules[i]
         primary_settlements += S_primary
 
-    return z_max, round(secondary_settlements, 2), round(primary_settlements, 2)
+    #DATA FOR PLOTS
+    depth = []
+    for i in layers:
+        C = float(i * float(-1))
+        depth.append(C)
+    vertical_stresses = z_stresses[1:]
+
+    return z_max, round(secondary_settlements, 2), round(primary_settlements, 2), depth, vertical_stresses, excavation_stresses, zd_stresses

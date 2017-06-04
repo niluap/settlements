@@ -20,6 +20,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
 </head>
 
 <body>
@@ -104,7 +105,7 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="row skill-cards-row">
-                    <div class="col-md-8">
+                    <div class="col-md-10">
                         <table id="myTable">
                             <thead>
                                 <tr>
@@ -126,33 +127,53 @@
                                 <tr id="rows1"></tr>
                             </tbody>
                         </table>
-                        <p>
+
+                        <div>
                             <button type="button" class="btn btn-default" value="Insert row" id="insert_row">Insert row</button>
-                        </p>
+                        </div>
                         </br>
-                        <p>
+
+                        <div>
                             <button type="button" class="btn btn-default" value="Delete" id="delete_row">Delete row</button>
-                        </p>
+                        </div>
                         </br>
+
                         <div id="compute">
                             <button type="button" class="btn btn-default btn-lg">Compute</button>
                         </div>
-                        <hr/>
-                        <hr/>
-                        <p>Maximum depth at which loads affect settlement [m]:</p>
-                        <p id="max_depth"></p>
-                        </br>
-                        <hr/>
-                        <hr/>
-                        <p>Total settlements [mm]:</p>
-                        <p id="settlemets"></p>
-                        </br>
+                        <div>
+                            <hr/>
+                            <hr/>
+                            <p>Maximum depth at which loads affect settlement [m]:</p>
+                            <p id="max_depth"></p>
+                            </br>
+                            <hr/>
+                            <hr/>
+                            <p>Total settlements [mm]:</p>
+                            <p id="settlemets"></p>
+                            </br>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row skill-cards-row">
+                    <div class="col-md-12">
+                        <p>Stresses in subsoil</p>
+                        </br>
+                        <div id="myDiv" style="height: 500px">
+                            <!-- Plotly chart will be drawn inside this DIV style="width: 600px; height: 400px;"-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 
 
 
@@ -163,6 +184,8 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script>
         // Insert row function
         var rows_count = 1;
@@ -212,6 +235,47 @@
                 function updatePageWithNewResult(result) {
                     updatePageData("max_depth", result.depth_affect_settlements);
                     updatePageData("settlemets", result.total_settlements);
+
+                    var vertical_stresses = {
+                        x: result.vertical_stresses_data,
+                        y: result.depth_data,
+                        type: 'lines',
+                        name: 'Vertical stresses',
+                        fill: 'tozerox',
+                    };
+
+                    var excavation_stresses = {
+                        x: result.excavation_stresses_data,
+                        y: result.depth_data,
+                        type: 'lines',
+                        name: 'Stresses caused by excavation',
+                        fill: 'tozerox',
+                        line: {
+                            color: 'rgb(255,124,0)',
+                        }
+
+                    };
+
+                    var additional_stresses = {
+                        x: result.additional_stresses_data,
+                        y: result.depth_data,
+                        type: 'lines',
+                        name: 'Additional stresses',
+                        fill: 'tozerox',
+
+                    };
+
+                    var data = [vertical_stresses, excavation_stresses, additional_stresses];
+                    var layout = {
+                        title: 'Stresses under concrete foundation',
+                        xaxis: {
+                            title: 'stresses [kPa]'
+                        },
+                        yaxis: {
+                            title: 'depth under foundation [m]',
+                        }
+                    };
+                    Plotly.newPlot('myDiv', data, layout);
                 }
 
                 function updatePageData(div_id, value) {
@@ -219,6 +283,7 @@
                     var content = document.createTextNode(value);
                     place_to_display_content.appendChild(content);
                 }
+
                 // send ajax
                 $.ajax({
                     url: 'http://127.0.0.1:8080/tasks',
@@ -235,8 +300,10 @@
 
                     error: function(xhr, resp, text) {
                         console.log(xhr, resp, text);
-                    }
+                    },
+
                 })
+
 
             });
         });

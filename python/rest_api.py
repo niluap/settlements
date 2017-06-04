@@ -51,7 +51,11 @@ def add_task():
         total_settlement = get_results[1] + get_results[2]
         return jsonify({'error': False,\
                     'depth_affect_settlements': get_results[0],\
-                        'total_settlements': total_settlement})
+                        'depth_data': get_results[3],\
+                            'vertical_stresses_data': get_results[4],\
+                                'excavation_stresses_data': get_results[5],\
+                                    'additional_stresses_data': get_results[6],\
+                                        'total_settlements': total_settlement})
 
 if __name__ == '__main__':
     # handler.setLevel(logging.INFO)
