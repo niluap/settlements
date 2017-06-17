@@ -33,7 +33,7 @@ def log_request_info():
 
 @app.route('/', methods=['GET'])
 def test():
-    return jsonify({"message": "It works! but i do not know what i have done"})
+    return jsonify({"message": "working well"})
 
 @app.route('/tasks', methods=["POST"])
 @cross_origin(origin='localhost', headers=['Content-Type', 'Authorization'])

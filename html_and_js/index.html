@@ -24,159 +24,122 @@
 </head>
 
 <body>
-    <div class="row">
-        <div class="col-xs-12">
+    <div class="row topnav-wrapper">
+        <nav class="container">
+            <div class="col-md-12">
+                <ul class="topnav">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Theory</a></li>
+                    <li><a href="#">About me</a></li>
+                    <li>
+                        <a href="https://github.com/niluap">
+                            <img src="./images/GitHub-Mark/PNG/GitHub-Mark-Light-32px.png">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="col-md-12">
             <div class="intro">
-
-                <h1 class="intro--teaser">Hello, I'm a Web Developer!</h1><br/>
-                <h2 class="intro--description">My name is Paulina and this is my first attempt at creating my own website.
-                </h2>
+                <h1 class="intro--teaser">Foundation settlements</h1>
             </div>
+        </div>
+        <div class="col-md-10 col-md-offset-1">
+            <form class="main-box" id="input-data-form">
+                <div class="form-single-input">
+                    <label class="col-md-4">Foundation width [B, m]:</label>
+                    <input type="text" id="width" placeholder="Enter data" />
+                </div>
+                <div class="form-single-input">
+                    <label class="col-md-4">Foundation length [L, m]:</label>
+                    <input type="text" id="length" placeholder="Enter data" />
+                </div>
+                <div class="form-single-input">
+                    <label class="col-md-4">Excavation depth [h, m]:</label>
+                    <input type="text" id="excavation_depth" placeholder="Enter data" />
+                </div>
+                <div class="form-single-input">
+                    <label class="col-md-4">Evenly distributed load [q, kPa]:</label>
+                    <input type="text" id="evenly_distributed_load" placeholder="Enter data" />
+                </div>
+            </form>
         </div>
     </div>
 
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row skill-cards-row">
-                    <div class="col-md-4">
-                        <div class="white-card hvr-underline-reveal">
-                            <span class="white-card--title">Input data</span>
-                            <p class="white-card--description">
-                                I am very experienced Python developer.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="white-card hvr-underline-reveal">
-                            <span class="white-card--title">Stresses</span>
-                            <p class="white-card--description">
-                                I can test software using different libraries and frameworks.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="white-card hvr-underline-reveal">
-                            <span class="white-card--title">Results</span>
-                            <p class="white-card--description">
-                                I understand how websites should be built and I am a specialist in user experience area.
-                            </p>
-                        </div>
-                    </div>
+        <div class="col-md-10 col-md-offset-1">
+            <div class="main-box-table">
+                <table id="myTable">
+                    <thead>
+                        <tr>
+                            <td>Layer</td>
+                            <td>Layer depth [m]</td>
+                            <td>Unit weight [kN/m3]</td>
+                            <td>Primary modulus of compressibility [MPa]</td>
+                            <td>Secondary modulus of compressibility [MPa]</td>
+                        </tr>
+                    </thead>
+                    <tbody id="myTable_body">
+                        <tr id="rows0">
+                            <td>1</td>
+                            <td><input name="Layer_depth" type='text' placeholder='Layer depth' /> </td>
+                            <td><input name='Unit weight' type='text' placeholder='Unit weight' /></td>
+                            <td><input name='Primary depth' type='text' placeholder='Primary modulus' /></td>
+                            <td><input name='Secondary depth' type='text' placeholder='Secondary modulus' /></td>
+                        </tr>
+                        <tr id="rows1"></tr>
+                    </tbody>
+                </table>
+                <div>
+                    <button type="button" class="btn btn-default" value="Insert row" id="insert_row">Insert row</button>
+                    <button type="button" class="btn btn-default" value="Delete" id="delete_row">Delete row</button>
+                </div>
+
+                <div id="compute">
+                    <button type="button" class="btn btn-default btn-lg">Compute</button>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row skill-cards-row">
-                    <div class="col-md-8">
-
-                        <form class="form_main" id="input-data-form">
-                            <div class="form-single-input">
-                                <label class="title col-sm-5">Foundation width [B]:</label>
-                                <input type="text" id="width" placeholder="Enter data" />
-                            </div>
-                            <div class="form-single-input">
-                                <label class="title col-sm-5">Foundation length [L]:</label>
-                                <input type="text" id="length" placeholder="Enter data" />
-                            </div>
-                            <div class="form-single-input">
-                                <label class="title col-sm-5">Excavation depth [h]:</label>
-                                <input type="text" id="excavation_depth" placeholder="Enter data" />
-                            </div>
-                            <div class="form-single-input">
-                                <label class="title col-sm-5">Evenly distributed load [q]:</label>
-                                <input type="text" id="evenly_distributed_load" placeholder="Enter data" />
-                            </div>
-                        </form>
-                    </div>
-                    <div div class="col-md-4">
-                        <h1>TUTAJ BĘDZIE OBRAZEK</h1>
-                    </div>
+        <div class="col-md-10 col-md-offset-1">
+            <div class="main-box-results">
+                <div>
+                    <h2 class="results--teaser"> Results </h2>
                 </div>
+                <p>Maximum depth at which loads affect settlements [m]:</p>
+                <p id="max_depth"></p>
+                </br>
+                <p>Total settlements [mm]:</p>
+                <p id="settlemets"></p>
             </div>
         </div>
     </div>
+
 
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row skill-cards-row">
-                    <div class="col-md-10">
-                        <table id="myTable">
-                            <thead>
-                                <tr>
-                                    <td>Layer</td>
-                                    <td>Layer depth</td>
-                                    <td>Unit weight</td>
-                                    <td>Primary modulus</td>
-                                    <td>Secondary modulus</td>
-                                </tr>
-                            </thead>
-                            <tbody id="myTable_body">
-                                <tr id="rows0">
-                                    <td>1</td>
-                                    <td><input name="Layer_depth" type='text' placeholder='Layer_depth' /> </td>
-                                    <td><input name='Unit weight' type='text' placeholder='Unit weight' /></td>
-                                    <td><input name='Primary depth' type='text' placeholder='Primary modulus' /></td>
-                                    <td><input name='Secondary depth' type='text' placeholder='Secondary modulus' /></td>
-                                </tr>
-                                <tr id="rows1"></tr>
-                            </tbody>
-                        </table>
+        <div class="col-md-10 col-md-offset-1">
+            <div class="main-box-plot">
+                <h2 class="results--teaser"> Plot</h2>
 
-                        <div>
-                            <button type="button" class="btn btn-default" value="Insert row" id="insert_row">Insert row</button>
-                        </div>
-                        </br>
-
-                        <div>
-                            <button type="button" class="btn btn-default" value="Delete" id="delete_row">Delete row</button>
-                        </div>
-                        </br>
-
-                        <div id="compute">
-                            <button type="button" class="btn btn-default btn-lg">Compute</button>
-                        </div>
-                        <div>
-                            <hr/>
-                            <hr/>
-                            <p>Maximum depth at which loads affect settlement [m]:</p>
-                            <p id="max_depth"></p>
-                            </br>
-                            <hr/>
-                            <hr/>
-                            <p>Total settlements [mm]:</p>
-                            <p id="settlemets"></p>
-                            </br>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row skill-cards-row">
-                    <div class="col-md-12">
-                        <p>Stresses in subsoil</p>
-                        </br>
-                        <div id="myDiv" style="height: 500px">
-                            <!-- Plotly chart will be drawn inside this DIV style="width: 600px; height: 400px;"-->
-                        </div>
-                    </div>
+                <div id="myDiv">
+                    <!-- Plotly chart will be drawn inside this DIV style="width: 600px; height: 400px;"-->
                 </div>
             </div>
         </div>
     </div>
 
-
-
-
+    <div class="row footer-wrapper">
+        <nav class="container">
+            <div class="col-md-12">
+                <div class="footer">All rights reserved Paulina Andersz</div>
+            </div>
+        </nav>
+    </div>
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -186,128 +149,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <!-- Plotly.js -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script>
-        // Insert row function
-        var rows_count = 1;
+    <!-- REST API script-->
+    <script src="js/script.js"></script>
 
-        $(document).ready(function() {
-
-            $("#insert_row").click(function() {
-
-                $('#rows' + rows_count).html("<td>" + (rows_count + 1) + "</td>" +
-                    "<td><input name='Layer_depth" + rows_count + "' type='text' placeholder='Layer_depth'/> </td>" +
-                    "<td><input  name='Unit weigh" + rows_count + "' type='text' placeholder='Unit weight' ></td>" +
-                    "<td><input  name='Primary modulus" + rows_count + "' type='text' placeholder='Primary modulu' ></td>" +
-                    "<td><input  name='Secondary modulus" + rows_count + "' type='text' placeholder='Secondary modulu' ></td>");
-
-                $('#myTable').append('<tr id="rows' + (rows_count + 1) + '"></tr>');
-                rows_count++;
-            });
-            // Delete row function
-            $("#delete_row").click(function() {
-                if (rows_count > 1) {
-                    $("#rows" + (rows_count - 1)).html('');
-                    rows_count--;
-                }
-            });
-
-
-            // Get data from table form, changing it into proper array for computing
-            $("#compute").click(function() {
-                var soil_data_table = document.getElementById('myTable');
-                all_row_data = []
-                for (var r = 1; r <= rows_count; r++) {
-                    for (var c = 1, m = soil_data_table.rows[r].cells.length; c < m; c++) {
-                        var value_from_table = Number.parseFloat(soil_data_table.rows[r].cells[c].children[0].value);
-                        all_row_data.push(value_from_table);
-                    }
-                }
-                var number_of_parameters = 4;
-                window.soil_layers_data = []
-                for (var i = 0; i < number_of_parameters; i++) {
-                    one_type_parameter = [];
-                    for (var j = i; j < all_row_data.length; j += 4) {
-                        one_type_parameter.push(all_row_data[j]);
-                    }
-                    soil_layers_data.push(one_type_parameter)
-                }
-                // Auxiliary function to display results on website;
-                function updatePageWithNewResult(result) {
-                    updatePageData("max_depth", result.depth_affect_settlements);
-                    updatePageData("settlemets", result.total_settlements);
-
-                    var vertical_stresses = {
-                        x: result.vertical_stresses_data,
-                        y: result.depth_data,
-                        type: 'lines',
-                        name: 'Vertical stresses',
-                        fill: 'tozerox',
-                    };
-
-                    var excavation_stresses = {
-                        x: result.excavation_stresses_data,
-                        y: result.depth_data,
-                        type: 'lines',
-                        name: 'Stresses caused by excavation',
-                        fill: 'tozerox',
-                        line: {
-                            color: 'rgb(255,124,0)',
-                        }
-
-                    };
-
-                    var additional_stresses = {
-                        x: result.additional_stresses_data,
-                        y: result.depth_data,
-                        type: 'lines',
-                        name: 'Additional stresses',
-                        fill: 'tozerox',
-
-                    };
-
-                    var data = [vertical_stresses, excavation_stresses, additional_stresses];
-                    var layout = {
-                        title: 'Stresses under concrete foundation',
-                        xaxis: {
-                            title: 'stresses [kPa]'
-                        },
-                        yaxis: {
-                            title: 'depth under foundation [m]',
-                        }
-                    };
-                    Plotly.newPlot('myDiv', data, layout);
-                }
-
-                function updatePageData(div_id, value) {
-                    var place_to_display_content = document.getElementById(div_id);
-                    var content = document.createTextNode(value);
-                    place_to_display_content.appendChild(content);
-                }
-
-                // send ajax
-                $.ajax({
-                    url: 'http://127.0.0.1:8080/tasks',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        width: Number.parseFloat($('#width').val()),
-                        length: Number.parseFloat($('#length').val()),
-                        excavation_depth: Number.parseFloat($('#excavation_depth').val()),
-                        evenly_distributed_load: Number.parseFloat($('#evenly_distributed_load').val()),
-                        soil_layers_data: soil_layers_data,
-                    }),
-                    success: updatePageWithNewResult,
-
-                    error: function(xhr, resp, text) {
-                        console.log(xhr, resp, text);
-                    },
-
-                })
-
-
-            });
-        });
-    </script>
 </body>
 
 </html>
