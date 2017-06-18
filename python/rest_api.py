@@ -48,7 +48,7 @@ def add_task():
         return jsonify({'error': True})
     else:
         get_results = compute_settlements(L, B, excavation_depth, evenly_distributed_load,soil_layers_data)
-        total_settlement = get_results[1] + get_results[2]
+        total_settlement = round(get_results[1] + get_results[2], 2)
         return jsonify({'error': False,\
                     'depth_affect_settlements': get_results[0],\
                         'depth_data': get_results[3],\

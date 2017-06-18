@@ -24,119 +24,120 @@
 </head>
 
 <body>
-    <div class="row topnav-wrapper">
-        <nav class="container">
-            <div class="col-md-12">
-                <ul class="topnav">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Theory</a></li>
-                    <li><a href="#">About me</a></li>
-                    <li>
-                        <a href="https://github.com/niluap">
-                            <img src="./images/GitHub-Mark/PNG/GitHub-Mark-Light-32px.png">
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-
-    <div class="container">
-        <div class="col-md-12">
-            <div class="intro">
-                <h1 class="intro--teaser">Foundation settlements</h1>
-            </div>
+    <div class="wrapper">
+        <div class="row topnav-wrapper">
+            <nav class="container">
+                <div class="col-md-10 col-md-offset-1">
+                    <ul class="topnav">
+                        <li><a>Home</a></li>
+                        <li>
+                            <a href="https://github.com/niluap">
+                                <img src="./images/GitHub-Mark-Light-32px.png">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
-        <div class="col-md-10 col-md-offset-1">
-            <form class="main-box" id="input-data-form">
-                <div class="form-single-input">
-                    <label class="col-md-4">Foundation width [B, m]:</label>
-                    <input type="text" id="width" placeholder="Enter data" />
-                </div>
-                <div class="form-single-input">
-                    <label class="col-md-4">Foundation length [L, m]:</label>
-                    <input type="text" id="length" placeholder="Enter data" />
-                </div>
-                <div class="form-single-input">
-                    <label class="col-md-4">Excavation depth [h, m]:</label>
-                    <input type="text" id="excavation_depth" placeholder="Enter data" />
-                </div>
-                <div class="form-single-input">
-                    <label class="col-md-4">Evenly distributed load [q, kPa]:</label>
-                    <input type="text" id="evenly_distributed_load" placeholder="Enter data" />
-                </div>
-            </form>
-        </div>
-    </div>
 
-    <div class="container">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="main-box-table">
-                <table id="myTable">
-                    <thead>
-                        <tr>
-                            <td>Layer</td>
-                            <td>Layer depth [m]</td>
-                            <td>Unit weight [kN/m3]</td>
-                            <td>Primary modulus of compressibility [MPa]</td>
-                            <td>Secondary modulus of compressibility [MPa]</td>
-                        </tr>
-                    </thead>
-                    <tbody id="myTable_body">
-                        <tr id="rows0">
-                            <td>1</td>
-                            <td><input name="Layer_depth" type='text' placeholder='Layer depth' /> </td>
-                            <td><input name='Unit weight' type='text' placeholder='Unit weight' /></td>
-                            <td><input name='Primary depth' type='text' placeholder='Primary modulus' /></td>
-                            <td><input name='Secondary depth' type='text' placeholder='Secondary modulus' /></td>
-                        </tr>
-                        <tr id="rows1"></tr>
-                    </tbody>
-                </table>
-                <div>
-                    <button type="button" class="btn btn-default" value="Insert row" id="insert_row">Insert row</button>
-                    <button type="button" class="btn btn-default" value="Delete" id="delete_row">Delete row</button>
-                </div>
-
-                <div id="compute">
-                    <button type="button" class="btn btn-default btn-lg">Compute</button>
+        <div class="container">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="intro">
+                    <h1 class="intro--teaser">Foundation settlements</h1>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="main-box-results">
-                <div>
-                    <h2 class="results--teaser"> Results </h2>
-                </div>
-                <p>Maximum depth at which loads affect settlements [m]:</p>
-                <p id="max_depth"></p>
-                </br>
-                <p>Total settlements [mm]:</p>
-                <p id="settlemets"></p>
+            <div class="col-md-10 col-md-offset-1">
+                <form class="main-box" id="input-data-form">
+                    <div class="form-single-input">
+                        <label class="col-md-4">Foundation width [B, m]:</label>
+                        <input type="text" id="width" placeholder="Enter data" />
+                    </div>
+                    <div class="form-single-input">
+                        <label class="col-md-4">Foundation length [L, m]:</label>
+                        <input type="text" id="length" placeholder="Enter data" />
+                    </div>
+                    <div class="form-single-input">
+                        <label class="col-md-4">Excavation depth [h, m]:</label>
+                        <input type="text" id="excavation_depth" placeholder="Enter data" />
+                    </div>
+                    <div class="form-single-input">
+                        <label class="col-md-4">Evenly distributed load [q, kPa]:</label>
+                        <input type="text" id="evenly_distributed_load" placeholder="Enter data" />
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
 
+        <div class="container">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="main-box-table">
+                    <div style="overflow-x:auto; overflow-y: hidden">
+                        <table id="myTable">
+                            <thead>
+                                <tr>
+                                    <td>Layer</td>
+                                    <td>Layer depth [m]</td>
+                                    <td>Unit weight [kN/m3]</td>
+                                    <td>Primary modulus of compressibility [MPa]</td>
+                                    <td>Secondary modulus of compressibility [MPa]</td>
+                                </tr>
+                            </thead>
+                            <tbody id="myTable_body">
+                                <tr id="rows0">
+                                    <td>1</td>
+                                    <td><input name="Layer_depth" type='text' placeholder='Layer depth' /> </td>
+                                    <td><input name='Unit weight' type='text' placeholder='Unit weight' /></td>
+                                    <td><input name='Primary depth' type='text' placeholder='Primary modulus' /></td>
+                                    <td><input name='Secondary depth' type='text' placeholder='Secondary modulus' /></td>
+                                </tr>
+                                <tr id="rows1"></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-default" value="Insert row" id="insert_row">Insert row</button>
+                        <button type="button" class="btn btn-default" value="Delete" id="delete_row">Delete row</button>
+                    </div>
 
-    <div class="container">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="main-box-plot">
-                <h2 class="results--teaser"> Plot</h2>
-
-                <div id="myDiv">
-                    <!-- Plotly chart will be drawn inside this DIV style="width: 600px; height: 400px;"-->
+                    <div id="compute">
+                        <button type="button" class="btn btn-default btn-lg">Compute</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
+        <div class="container">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="main-box-results">
+                    <div>
+                        <h2 class="results--teaser"> Results </h2>
+                    </div>
+                    <p>Maximum depth at which loads affect settlements [m]:</p>
+                    <p id="max_depth"></p>
+                    </br>
+                    <p>Total settlements [mm]:</p>
+                    <p id="settlemets"></p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="main-box-plot">
+                    <h2 class="results--teaser"> Plot</h2>
+
+                    <div id="myDiv">
+                        <!-- Plotly chart will be drawn inside this DIV style="width: 600px; height: 400px;"-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row footer-wrapper">
         <nav class="container">
             <div class="col-md-12">
-                <div class="footer">All rights reserved Paulina Andersz</div>
+                <div class="footer">Paulina Andersz 2017</div>
             </div>
         </nav>
     </div>

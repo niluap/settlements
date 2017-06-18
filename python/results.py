@@ -66,3 +66,4 @@ def compute_settlements(L, B, excavation_depth, evenly_distributed_load, soil_la
     vertical_stresses = z_stresses[1:]
 
     return z_max, round(secondary_settlements, 2), round(primary_settlements, 2), depth, vertical_stresses, excavation_stresses, zd_stresses
+
